@@ -1,0 +1,65 @@
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        
+        StringBuilder prefix = new StringBuilder("");
+        String[] words = strs;
+        int loopLimit;
+        
+        if(words.length > 1){
+            if (words[0].length() > words[1].length()){
+                loopLimit = words[1].length();
+             }
+            else {
+                loopLimit = words[0].length();
+            }
+        }
+        else{
+            return words[0];
+        }
+        
+        //System.out.print(words[0]);
+        
+        for (int i = 0; i < loopLimit; i++){       
+            if(Character.compare(words[0].charAt(i), words[1].charAt(i))==0){
+                prefix.append(words[0].charAt(i));
+            }
+            else{
+                break;
+            }
+        }
+        
+        
+        for (int i = 2; i < words.length; i++){
+            System.out.print(prefix.toString());
+ 
+          /*  if(words[i].length() < prefix.length()){
+                newLoopLimit = words[i].length();
+            }
+            else{
+                newLoopLimit = prefix.length();
+            }*/
+            //System.out.print(newLoopLimit);
+            
+                for (int j = 0; j < prefix.length(); j++){
+                 
+                    if(words[i].equals("")){
+                        return "";
+                    }
+                    else if(words[i].length() < prefix.length()){
+                        prefix.deleteCharAt(prefix.length()-1);
+                    }
+                     else {
+                        if (Character.compare(words[i].charAt(j), prefix.charAt(j)) != 0){
+                            prefix.deleteCharAt(j);
+                            i--;
+        
+                        }
+                    }
+                }
+            
+        }
+        
+       return prefix.toString();
+        
+    }
+}
